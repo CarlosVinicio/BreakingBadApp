@@ -1,10 +1,8 @@
 import { Character } from "./Api";
-interface List {
-  list: Character[]
-}
-interface Characters {
-  list: List
+interface Global {
+  list: Character[],
+  language: string
 }
 export interface reduxState {
-  characters: Characters
+  global: Global
 }

@@ -2,19 +2,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  list: []
+  list: [],
+  language: "es"
 };
 
-const charactersSlice = createSlice({
-  name: 'list',
+const globalSlice = createSlice({
+  name: 'global',
   initialState,
   reducers: {
     addCharactersList: (state, action) => {
       state.list = action.payload;
-    }
+    },
+    setLanguage: (state, action) => {
+      state.language = action.payload;
+    },
   }
 });
 
-export const { addCharactersList } = charactersSlice.actions;
+export const { addCharactersList, setLanguage } = globalSlice.actions;
 
-export default charactersSlice.reducer;
+export default globalSlice.reducer;
