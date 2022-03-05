@@ -4,7 +4,7 @@ import { Character } from "../../utils/interfaces/Api"
 import { fetchAllCharacters, fetchCharacterById, fetchQuoteByAuthor } from "../resolvers/breaking-bad"
 
 export const getAllCharacters = () => (dispatch:any) => {
-  fetchAllCharacters().then((response: Character[]) => {
+  fetchAllCharacters().then((response: any) => {
     dispatch(addCharactersList(response));
   }).catch((error: Error) => {
     throw error;
@@ -12,7 +12,7 @@ export const getAllCharacters = () => (dispatch:any) => {
 };
 
 export const getCharacterById = (characterId: string) => {
-  return fetchCharacterById(characterId).then((response: Character[]) => {
+  return fetchCharacterById(characterId).then((response: any) => {
     return response;
   }).catch((error: Error) => {
     throw error;

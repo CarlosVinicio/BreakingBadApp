@@ -6,33 +6,32 @@ import {
   IconButton,
   Typography,
   Menu,
-  Container,
-  Avatar,
-  Button,
-  Tooltip,
   MenuItem,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { setLanguage } from "../../store/reducers/global";
 import { useDispatch, useSelector } from "react-redux";
 import { reduxState } from "../../utils/interfaces/Redux";
 import { useTranslation } from "react-i18next";
-
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import LanguageRoundedIcon from "@mui/icons-material/LanguageRounded";
+import { useNavigate } from "react-router-dom";
 const settings = [
   { language: "Español", id: "es" },
   { language: "English", id: "en" },
 ];
 
 const AppMenu = () => {
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
-  const { language } = useSelector((state: reduxState) => {
-    return state.global;
-  });
+  const navigate = useNavigate();
 
-  const handleOpenUserMenu = (event: any) => {
-    setAnchorElUser(event.currentTarget);
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   const handleCloseUserMenu = (id: string) => {
@@ -43,23 +42,41 @@ const AppMenu = () => {
       dispatch(setLanguage("es"));
       i18n.changeLanguage(id);
     }
-    setAnchorElUser(null);
+    handleClose();
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="lenguajes">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+            onClick={() =>navigate('/')}
+          >
+            <HomeOutlinedIcon />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Breaking Bad
+          </Typography>
+
+          <div>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleMenu}
+              color="inherit"
+            >
+              <LanguageRoundedIcon />
+            </IconButton>
             <Menu
-              sx={{ mt: "45px" }}
               id="menu-appbar"
-              anchorEl={anchorElUser}
+              anchorEl={anchorEl}
               anchorOrigin={{
                 vertical: "top",
                 horizontal: "right",
@@ -69,8 +86,8 @@ const AppMenu = () => {
                 vertical: "top",
                 horizontal: "right",
               }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
             >
               {settings.map((setting, index) => (
                 <MenuItem
@@ -81,10 +98,10 @@ const AppMenu = () => {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </div>
         </Toolbar>
-      </Container>
-    </AppBar>
+      </AppBar>
+    </Box>
   );
 };
 
