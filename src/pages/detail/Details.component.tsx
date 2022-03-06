@@ -49,25 +49,25 @@ export const Details = () => {
               <div className="character__detail">
                 <img src={characterById[0].img} className="character__detail__image" />
                 <div className="character__detail_data">
-                  <div className="name">Información personal</div>
+                  <div className="name">{t("details.personal.information")}</div>
                   <div className="data__block">
-                    <div className="title">Nombre</div>
+                    <div className="title">{t("details.name")}</div>
                     <div>{characterById[0].name}</div>
                   </div>
                   <div className="data__block">
-                    <div className="title">Nickname</div>
+                    <div className="title">{t("details.nickname")}</div>
                     <div>{characterById[0].nickname}</div>
                   </div>
                   <div className="data__block">
-                    <div className="title">Cumpleaños</div>
+                    <div className="title">{t("details.birthday")}</div>
                     <div>{characterById[0].birthday}</div>
                   </div>
                   <div className="data__block">
-                    <div className="title">Ocupación</div>
+                    <div className="title">{t("details.ocupation")}</div>
                     <div>{characterById[0].occupation}</div>
                   </div>
                   <div className="data__block">
-                    <div className="title">Estado</div>
+                    <div className="title">{t( "details.state")}</div>
                     <div>{characterById[0].status}</div>
                   </div>
                 </div>
@@ -77,26 +77,26 @@ export const Details = () => {
             { episodes.length > 0 && 
               <div className="character__detail">
                 <div className="character__detail_data">
-                  <div className="name">Episodios</div>
+                  <div className="name">{t("details.episodes")}</div>
                   <div className="data__block__horizontal">
                     <div>
-                      <div className="title">Título</div>
+                      <div className="title">{t("details.episodes.title")}</div>
                       <div>{episodes[0].title}</div>
                     </div>
                     <div>
-                      <div className="title">Episodio</div>
+                      <div className="title">{t("details.episodes.espisode")}</div>
                       <div>{episodes[0].episode}</div>
                     </div>
                     <div>
-                      <div className="title">Temporada</div>
+                      <div className="title">{t("details.episodes.sesion")}</div>
                       <div>{episodes[0].season}</div>
                     </div>
                     <div>
-                      <div className="title">Series</div>
+                      <div className="title">{t("details.episodes.series")}</div>
                       <div>{episodes[0].series}</div>
                     </div>
                     <div>
-                      <div className="title">Fecha en el aire</div>
+                      <div className="title">{t("details.episodes.date")}</div>
                       <div>{episodes[0].air_date}</div>
                     </div>
                   </div>
@@ -106,7 +106,7 @@ export const Details = () => {
 
             <div className="character__detail">
               <div className="character__detail_data">
-                <div className="name">Frase Aleatoria</div>
+                <div className="name">{t("details.quotes")}</div>
                 <div className="data__block quotes">
                   <div>{randomQuote?.quote || `Sin frases`}</div>
                 </div>

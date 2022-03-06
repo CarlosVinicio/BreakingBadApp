@@ -1,5 +1,15 @@
 {
-  "home.edit": "Editar",
-  "home.button.text": "Cambiar idioma",
-  "details.main.details": "Detalles principales"
+  "details.personal.information": "Información personal",
+  "details.name": "Nombre",
+  "details.nickname": "Alias",
+  "details.birthday": "Cumpleaños",
+  "details.ocupation": "Ocupación",
+  "details.state": "Estado",
+  "details.episodes": "Episodios",
+  "details.episodes.title": "Título",
+  "details.episodes.espisode": "Episodio",
+  "details.episodes.sesion": "Temporada",
+  "details.episodes.series": "Series",
+  "details.episodes.date": "Fecha en el aire",
+  "details.quotes": "Frese aleatoria"
 }

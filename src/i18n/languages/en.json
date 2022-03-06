@@ -1,5 +1,15 @@
 {
-  "home.edit": "Edit",
-  "home.button.text": "Change language",
-  "details.main.details": "Main details"
+  "details.personal.information": "Personal information",
+  "details.name": "Name",
+  "details.nickname": "Nickname",
+  "details.birthday": "Birthday",
+  "details.ocupation": "Ocupation",
+  "details.state": "Status",
+  "details.episodes": "Episodes",
+  "details.episodes.title": "Title",
+  "details.episodes.espisode": "Episode",
+  "details.episodes.sesion": "Season",
+  "details.episodes.series": "Series",
+  "details.episodes.date": "Air date",
+  "details.quotes": "Random phrase"
 }
