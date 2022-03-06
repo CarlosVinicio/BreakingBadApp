@@ -1,5 +1,4 @@
 import { BASE_URL } from '../config';
-import axios from 'axios';
 import { Character } from '../../utils/interfaces/Api';
 import customAxios from '../index';
 

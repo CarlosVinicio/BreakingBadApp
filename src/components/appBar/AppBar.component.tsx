@@ -9,8 +9,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { setLanguage } from "../../store/reducers/global";
-import { useDispatch, useSelector } from "react-redux";
-import { reduxState } from "../../utils/interfaces/Redux";
+import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import LanguageRoundedIcon from "@mui/icons-material/LanguageRounded";
