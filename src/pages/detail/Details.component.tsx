@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
+  getAllEpisodes,
   getCharacterById,
   getQuoteByAuthor,
 } from "../../api/services/breaking-bad";
@@ -8,57 +9,111 @@ import { Character } from "../../utils/interfaces/Api";
 import { WrapperStyled } from "./Details.styled";
 import { getRandomQuote } from "../../utils/helpers/global";
 import { useTranslation } from "react-i18next";
+import image from "../../assets/363c4a9baa2ca6b38ceae40259e94a0c.jpeg";
+import { useDispatch, useSelector } from "react-redux";
+import { reduxState } from "../../utils/interfaces/Redux";
+import { setRandomQuote } from "../../store/reducers/global";
 
 export const Details = () => {
-  const [details, setDetails] = useState<Character[]>();
-  const [quoteDetail, setQuoteDetail] = useState();
-  const [randomQuote, setRandomQuote] = useState(null);
+  const dispatch = useDispatch();
+  const { episodes, randomQuote, quoteByAuthor, characterById } = useSelector((state: reduxState) => { 
+    return state.global
+  });
+
   const { id } = useParams();
   const { t } = useTranslation();
 
   useEffect(() => {
     if (id) {
-      getCharacterData(id);
+      dispatch(getCharacterById(id)); 
     }
-  }, [id]);
+  }, []);
 
   useEffect(() => {
-    getQuoteData();
-  }, [details]);
+    dispatch(getAllEpisodes());
 
-  const getCharacterData = async (id: string) => {
-    const response = await getCharacterById(id);
-    setDetails(response);
-  };
-
-  const getQuoteData = async () => {
-    if (details && details?.length > 0) {
-      const response = await getQuoteByAuthor(details[0].name);
-      const randomQuote = getRandomQuote(response);
-      setRandomQuote(randomQuote);
-      setQuoteDetail(response);
-    }
-  };
+   /*  if(episodes.length >= 0){
+      const x = episodes.filter(episode => episode.characters.includes(characterById));
+      console.log('====================================');
+      console.log(x);
+      console.log('====================================');
+    } */
+  }, [characterById]);
 
   return (
     <WrapperStyled>
-      {details && quoteDetail && (
         <div className="container__details">
-         {/*  <div>{JSON.stringify(details)}</div>
-          <div>{JSON.stringify(quoteDetail)}</div> */}
-          <div>{t("details.main.details")}</div>
-          <div className="details__data">
-            <div className="image">
-              <img src={details[0].img} />
-            </div>
-            <div className="data">
-              <div>nombre</div>
-              <div>nickname</div>
-              <div>cumpleaños</div>
+          <img src={image} className="banner-image" />
+          <div>
+            { characterById && 
+              <div className="character__detail">
+                <img src={characterById[0].img} className="character__detail__image" />
+                <div className="character__detail_data">
+                  <div className="name">Información personal</div>
+                  <div className="data__block">
+                    <div className="title">Nombre</div>
+                    <div>{characterById[0].name}</div>
+                  </div>
+                  <div className="data__block">
+                    <div className="title">Nickname</div>
+                    <div>{characterById[0].nickname}</div>
+                  </div>
+                  <div className="data__block">
+                    <div className="title">Cumpleaños</div>
+                    <div>{characterById[0].birthday}</div>
+                  </div>
+                  <div className="data__block">
+                    <div className="title">Ocupación</div>
+                    <div>{characterById[0].occupation}</div>
+                  </div>
+                  <div className="data__block">
+                    <div className="title">Estado</div>
+                    <div>{characterById[0].status}</div>
+                  </div>
+                </div>
+              </div>
+            }
+
+            { episodes.length > 0 && 
+              <div className="character__detail">
+                <div className="character__detail_data">
+                  <div className="name">Episodios</div>
+                  <div className="data__block__horizontal">
+                    <div>
+                      <div className="title">Título</div>
+                      <div>{episodes[0].title}</div>
+                    </div>
+                    <div>
+                      <div className="title">Episodio</div>
+                      <div>{episodes[0].episode}</div>
+                    </div>
+                    <div>
+                      <div className="title">Temporada</div>
+                      <div>{episodes[0].season}</div>
+                    </div>
+                    <div>
+                      <div className="title">Series</div>
+                      <div>{episodes[0].series}</div>
+                    </div>
+                    <div>
+                      <div className="title">Fecha en el aire</div>
+                      <div>{episodes[0].air_date}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
+
+            <div className="character__detail">
+              <div className="character__detail_data">
+                <div className="name">Frase Aleatoria</div>
+                <div className="data__block quotes">
+                  <div>{randomQuote?.quote || `Sin frases`}</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      )}
     </WrapperStyled>
   );
 };

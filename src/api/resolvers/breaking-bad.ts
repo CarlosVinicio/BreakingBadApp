@@ -17,3 +17,8 @@ export const fetchQuoteByAuthor = async (author: string) => {
   const response = await axios.get(`${BASE_URL}/quote?author=${author}`);
   return response.data;  
 }
+
+export const fetchAllEpisodes = async () => {  
+  const response = await axios.get(`${BASE_URL}/episodes`);
+  return response.data;  
+}

@@ -5,26 +5,59 @@ export const WrapperStyled = styled.div`
     height: 100vh;
     max-width: 1150px;
     margin: auto;
-    margin-top: 50px;
+    margin-top: 10px;
   }
-  .details__data {
+  .banner-image {
+    width: 100%;
+  }
+  .character__detail{
     display: flex;
-    padding: 30;
-    min-height: 200px;
-    border-bottom: solid;
-    padding-bottom: 47px;
-    .data: {
-      width: 100%;
-      background-color: yellow;
-      padding: 20px;
-    }
+    padding: 30;  
   }
-  .image {
-    width: 300px;
-    height: 275px;
+  .character__detail__image {
+    width: 350px;
+    height: 350px;
+    border-radius: 8px;
+    margin-right: 25px;
   }
-  .image>img{
+  .character__detail__image>img{
     width: 100%;
     height: 100%;
+  } 
+  .character__detail_data {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    width: 100%;
+    .name{
+      font-size: 30px;
+      margin-bottom: 10px;
+      color: darkcyan;
+    }
+    .data__block{
+      margin-bottom: 10px;
+    }
+    .quotes{
+      border: solid;
+      background-color: ghostwhite;
+      height: 114px;
+      border-radius: 10px;
+      align-items: center;
+      display: flex;
+      padding-left:20px;
+    }
+    .data__block__horizontal{
+      border: solid;
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+      background-color: ghostwhite;
+      height: 114px;
+      border-radius: 10px;
+      align-items: center;
+    }
+    .title {
+      font-size: 20;
+      font-weight: 600;
+      color: "#000";
+    }
   }
 `;
