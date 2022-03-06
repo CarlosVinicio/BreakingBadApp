@@ -27,10 +27,12 @@ export const WrapperStyled = styled.div`
   .character__detail_data {
     font-family: 'Source Sans Pro', Arial, sans-serif;
     width: 100%;
+    margin-top: 20px;
     .name{
       font-size: 30px;
       margin-bottom: 10px;
       color: darkcyan;
+      border-bottom: 1px solid;
     }
     .data__block{
       margin-bottom: 10px;
@@ -60,4 +62,8 @@ export const WrapperStyled = styled.div`
       color: "#000";
     }
   }
+  .table{
+    padding-bottom: 50px;
+  }
+
 `;

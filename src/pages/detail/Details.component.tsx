@@ -10,6 +10,13 @@ import { WrapperStyled } from "./Details.styled";
 import { getRandomQuote } from "../../utils/helpers/global";
 import { useTranslation } from "react-i18next";
 import image from "../../assets/363c4a9baa2ca6b38ceae40259e94a0c.jpeg";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
 export const Details = () => {
   const [randomQuote, setRandomQuote] = useState<Quote>();
@@ -35,11 +42,30 @@ export const Details = () => {
     }
   }, []);
 
-  useEffect(() => {
-    getAllEpisodes().then((response: Episodes[]) => {
-      setEpisodes(response);
+  const getEpisodesBySeries = (
+    episodes: Episodes[],
+    characterById: Character
+  ) => {
+    return episodes.filter((episode: Episodes) => {
+      return episode.series === characterById.category;
     });
-  }, []);
+  };
+
+  useEffect(() => {
+    if (characterById) {
+      getAllEpisodes().then((response: Episodes[]) => {
+        setEpisodes(getEpisodesBySeries(response, characterById[0]));
+      });
+    }
+  }, [characterById]);
+
+  const columns = [
+    { id: "1", label: `${t("details.episodes.title")}`, minWidth: 170 },
+    { id: "2", label: `${t("details.episodes.espisode")}`, minWidth: 170 },
+    { id: "3", label: `${t("details.episodes.sesion")}`, minWidth: 170 },
+    { id: "4", label: `${t("details.episodes.series")}`, minWidth: 170 },
+    { id: "5", label: `${t("details.episodes.date")}`, minWidth: 170 },
+  ];
 
   return (
     <WrapperStyled>
@@ -78,38 +104,6 @@ export const Details = () => {
             </div>
           )}
 
-          {episodes && episodes.length > 0 && (
-            <div className="character__detail">
-              <div className="character__detail_data">
-                <div className="name">{t("details.episodes")}</div>
-                <div className="data__block__horizontal">
-                  <div>
-                    <div className="title">{t("details.episodes.title")}</div>
-                    <div>{episodes[0].title}</div>
-                  </div>
-                  <div>
-                    <div className="title">
-                      {t("details.episodes.espisode")}
-                    </div>
-                    <div>{episodes[0].episode}</div>
-                  </div>
-                  <div>
-                    <div className="title">{t("details.episodes.sesion")}</div>
-                    <div>{episodes[0].season}</div>
-                  </div>
-                  <div>
-                    <div className="title">{t("details.episodes.series")}</div>
-                    <div>{episodes[0].series}</div>
-                  </div>
-                  <div>
-                    <div className="title">{t("details.episodes.date")}</div>
-                    <div>{episodes[0].air_date}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
           <div className="character__detail">
             <div className="character__detail_data">
               <div className="name">{t("details.quotes")}</div>
@@ -120,6 +114,47 @@ export const Details = () => {
               </div>
             </div>
           </div>
+          {episodes && episodes.length > 0 && (
+            <div className="character__detail_data table">
+              <div className="name">{t("details.episodes")}</div>
+              <Paper sx={{ width: "100%", overflow: "hidden" }}>
+                <TableContainer sx={{ maxHeight: 400 }}>
+                  <Table stickyHeader aria-label="sticky table">
+                    <TableHead>
+                      <TableRow>
+                        {columns.map((column) => (
+                          <TableCell
+                            key={column.id}
+                            style={{ minWidth: column.minWidth }}
+                          >
+                            {column.label}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {episodes.map((row) => {
+                        return (
+                          <TableRow
+                            hover
+                            role="checkbox"
+                            tabIndex={-1}
+                            key={row.episode_id}
+                          >
+                            <TableCell>{row.title}</TableCell>
+                            <TableCell>{row.episode}</TableCell>
+                            <TableCell>{row.season}</TableCell>
+                            <TableCell>{row.series}</TableCell>
+                            <TableCell>{row.air_date}</TableCell>
+                          </TableRow>
+                        );
+                      })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Paper>
+            </div>
+          )}
         </div>
       </div>
     </WrapperStyled>
