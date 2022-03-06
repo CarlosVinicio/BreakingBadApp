@@ -12,5 +12,7 @@
   "details.episodes.series": "Series",
   "details.episodes.date": "Fecha en el aire",
   "details.quotes": "Frase aleatoria",
-  "details.quotes.exists": "Sin frases disponibles"
+  "details.quotes.exists": "Sin frases disponibles",
+  "details.quotes.search": "Buscar"
+
 }

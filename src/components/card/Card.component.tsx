@@ -5,6 +5,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import { useTranslation } from "react-i18next";
 interface Props {
   character: Character;
 }
@@ -12,6 +13,7 @@ interface Props {
 export const CardComponent = (props: Props) => {
   const { character } = props;
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const navigateToDetail = () => {
     navigate(`/details/${character.char_id}`);
@@ -34,7 +36,7 @@ export const CardComponent = (props: Props) => {
           {character.name}({character.nickname})
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Ocupación: {character.occupation}
+          {t("details.ocupation")}: {character.occupation}
         </Typography>
       </CardContent>
     </Card>

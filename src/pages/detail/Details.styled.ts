@@ -5,7 +5,7 @@ export const WrapperStyled = styled.div`
     height: 100vh;
     max-width: 1150px;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 20px;
   }
   .banner-image {
     width: 100%;

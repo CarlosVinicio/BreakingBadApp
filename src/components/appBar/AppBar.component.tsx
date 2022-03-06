@@ -13,7 +13,11 @@ import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import LanguageRoundedIcon from "@mui/icons-material/LanguageRounded";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Search, SearchIconWrapper, StyledInputBase } from "./AppBar.styled";
+import SearchIcon from "@mui/icons-material/Search";
+import { getCharacterByName } from "../../api/services/breaking-bad";
+
 const settings = [
   { language: "Español", id: "es" },
   { language: "English", id: "en" },
@@ -21,9 +25,12 @@ const settings = [
 
 const AppMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  let delayTimer: NodeJS.Timeout;
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -44,6 +51,13 @@ const AppMenu = () => {
     handleClose();
   };
 
+  const searchCharacterByName = (e: { target: { value: string; }; }) => {
+    clearTimeout(delayTimer);
+    delayTimer = setTimeout(function () {
+      dispatch(getCharacterByName(e.target.value));
+    }, 1000);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -54,7 +68,7 @@ const AppMenu = () => {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-            onClick={() =>navigate('/')}
+            onClick={() => navigate("/")}
           >
             <HomeOutlinedIcon />
           </IconButton>
@@ -62,7 +76,19 @@ const AppMenu = () => {
             Breaking Bad
           </Typography>
 
-          <div>
+          <div style={{ display: "flex" }}>
+            {pathname === "/" && (
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder={`${t("details.quotes.search")}`}
+                  inputProps={{ "aria-label": "Buscar" }}
+                  onChange={searchCharacterByName}
+                />
+              </Search>
+            )}
             <IconButton
               size="large"
               aria-label="account of current user"

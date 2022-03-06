@@ -6,9 +6,10 @@ import {
   fetchCharacterById,
   fetchQuoteByAuthor,
   fetchAllEpisodes,
+  fetCharacterByName,
 } from "../resolvers/breaking-bad";
 
-export const getAllCharacters = () => (dispatch: any) => {
+export const getAllCharacters = () => (dispatch: (arg0: { payload: any; type: string; }) => void) => {
   fetchAllCharacters()
     .then((response: Character[]) => {
       dispatch(addCharactersList(response));
@@ -43,6 +44,16 @@ export const getAllEpisodes = () => {
   return fetchAllEpisodes()
     .then((response: Episodes[]) => {
       return response;
+    })
+    .catch((error: Error) => {
+      throw error;
+    });
+};
+
+export const getCharacterByName = (name: string) => (dispatch: (arg0: { payload: any; type: string; }) => void) => {
+  return fetCharacterByName(name)
+    .then((response: Character[]) => {
+      dispatch(addCharactersList(response));
     })
     .catch((error: Error) => {
       throw error;

@@ -21,3 +21,8 @@ export const fetchAllEpisodes = async () => {
   const response = await customAxios.get(`${BASE_URL}/episodes`);
   return response.data;  
 }
+
+export const fetCharacterByName = async (name: string) => {  
+  const response = await customAxios.get(`${BASE_URL}/characters?name=${name}`);
+  return response.data;  
+}
