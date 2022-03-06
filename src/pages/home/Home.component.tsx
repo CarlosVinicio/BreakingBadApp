@@ -13,6 +13,9 @@ export const Home = () => {
 
   useEffect(() => {
     dispatch(getAllCharacters());
+    const r = getAllCharacters();
+    console.log(r);
+    
   }, [])
   
   return (
