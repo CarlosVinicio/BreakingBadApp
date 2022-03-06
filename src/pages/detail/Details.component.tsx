@@ -103,17 +103,20 @@ export const Details = () => {
               </div>
             </div>
           )}
-
-          <div className="character__detail">
-            <div className="character__detail_data">
-              <div className="name">{t("details.quotes")}</div>
-              <div className="data__block quotes">
-                <div>
-                  {randomQuote?.quote || `${t("details.quotes.exists")}`}
+          {
+            characterById && episodes && episodes.length > 0 && (
+              <div className="character__detail">
+              <div className="character__detail_data">
+                <div className="name">{t("details.quotes")}</div>
+                <div className="data__block quotes">
+                  <div>
+                    {randomQuote?.quote || `${t("details.quotes.exists")}`}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+            )
+          }
           {episodes && episodes.length > 0 && (
             <div className="character__detail_data table">
               <div className="name">{t("details.episodes")}</div>
