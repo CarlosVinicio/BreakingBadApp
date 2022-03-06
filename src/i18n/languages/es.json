@@ -11,5 +11,6 @@
   "details.episodes.sesion": "Temporada",
   "details.episodes.series": "Series",
   "details.episodes.date": "Fecha en el aire",
-  "details.quotes": "Frese aleatoria"
+  "details.quotes": "Frese aleatoria",
+  "details.quotes.exists": "Sin frases disponibles"
 }

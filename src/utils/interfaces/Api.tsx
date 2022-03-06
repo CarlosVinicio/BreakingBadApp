@@ -24,5 +24,11 @@ export interface Episodes {
 
 export enum Series {
   BetterCallSaul = "Better Call Saul",
-  BreakingBad = "Breaking Bad",
+  BreakingBad = "Breaking Bad",}
+
+export interface Quote {
+  author: string,
+  quote: string,
+  quote_id: number
+  series: string,
 }

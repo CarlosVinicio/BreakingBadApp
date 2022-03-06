@@ -9,9 +9,7 @@ import { WrapperStyled } from './Home.styled';
 
 export const Home = () => {
   const dispatch = useDispatch();
-  const { list } = useSelector((state: reduxState) => { 
-    return state.global
-  })
+  const { list } = useSelector((state: reduxState) => state.global);
 
   useEffect(() => {
     dispatch(getAllCharacters());

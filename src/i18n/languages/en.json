@@ -11,5 +11,6 @@
   "details.episodes.sesion": "Season",
   "details.episodes.series": "Series",
   "details.episodes.date": "Air date",
-  "details.quotes": "Random phrase"
+  "details.quotes": "Random phrase",
+  "details.quotes.exists": "No phrases available"
 }

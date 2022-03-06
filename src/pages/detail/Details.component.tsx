@@ -26,19 +26,9 @@ export const Details = () => {
   useEffect(() => {
     if (id) {
       dispatch(getCharacterById(id)); 
+      dispatch(getAllEpisodes());
     }
   }, []);
-
-  useEffect(() => {
-    dispatch(getAllEpisodes());
-
-   /*  if(episodes.length >= 0){
-      const x = episodes.filter(episode => episode.characters.includes(characterById));
-      console.log('====================================');
-      console.log(x);
-      console.log('====================================');
-    } */
-  }, [characterById]);
 
   return (
     <WrapperStyled>
@@ -108,7 +98,7 @@ export const Details = () => {
               <div className="character__detail_data">
                 <div className="name">{t("details.quotes")}</div>
                 <div className="data__block quotes">
-                  <div>{randomQuote?.quote || `Sin frases`}</div>
+                  <div>{randomQuote?.quote || `${t("details.quotes.exists")}`}</div>
                 </div>
               </div>
             </div>
